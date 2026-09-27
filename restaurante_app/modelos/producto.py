@@ -10,29 +10,19 @@ class Producto:
     ) -> None:
 
         if not codigo.strip():
-            raise ValueError(
-                "El código no puede estar vacío."
-            )
+            raise ValueError("El código no puede estar vacío.")
 
         if not nombre.strip():
-            raise ValueError(
-                "El nombre no puede estar vacío."
-            )
+            raise ValueError("El nombre no puede estar vacío.")
 
         if not categoria.strip():
-            raise ValueError(
-                "La categoría no puede estar vacía."
-            )
+            raise ValueError("La categoría no puede estar vacía.")
 
         if precio < 0:
-            raise ValueError(
-                "El precio no puede ser negativo."
-            )
+            raise ValueError("El precio no puede ser negativo.")
 
         if stock < 0:
-            raise ValueError(
-                "El stock no puede ser negativo."
-            )
+            raise ValueError("El stock no puede ser negativo.")
 
         self.codigo = codigo.strip()
         self.nombre = nombre.strip()

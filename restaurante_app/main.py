@@ -11,11 +11,10 @@ class AplicacionRestaurante:
 
     def __init__(self) -> None:
 
-        # Única ventana principal
         self.root = tk.Tk()
 
         self.root.title(
-            "Restaurante App - Semana 14"
+            "Restaurante App - Semana 15"
         )
 
         self.root.geometry(

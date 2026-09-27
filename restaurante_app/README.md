@@ -1,136 +1,123 @@
-# Restaurante App - Semana 14
+# Restaurante App - Semana 15
 
 ## Descripción
 
-Proyecto correspondiente a la Semana 14 de la asignatura
+Proyecto correspondiente a la Semana 15 de la asignatura
 Programación Orientada a Objetos.
 
-Esta actividad continúa la evolución de Restaurante App iniciada
-en la Semana 13.
+Esta actividad continúa la evolución de Restaurante App
+desarrollada durante las semanas anteriores.
 
-En esta semana se aplican componentes y contenedores de Tkinter
-para organizar mejor la interfaz gráfica e incorporar operaciones
-de gestión sobre los productos.
+En la Semana 15 se estudian los conceptos fundamentales de
+manejo de eventos en interfaces gráficas mediante Tkinter.
 
-La aplicación mantiene una arquitectura modular separando
-modelos, servicios, persistencia e interfaz gráfica.
+La aplicación incorpora una sección de ventas para observar
+el flujo completo desde la interacción del usuario hasta la
+persistencia y la respuesta visual.
+
+## Objetivo de Semana 15
+
+Comprender el flujo:
+
+Usuario -> Componente -> Evento -> Callback ->
+Servicio -> Modelo/Datos -> Respuesta visual
+
+La sección Ventas permite relacionar un usuario registrado
+con un producto registrado y la fecha de la operación.
 
 ## Estructura
 
 restaurante_app/
+├── assets/
 ├── datos/
 │   ├── productos.json
-│   └── usuarios.json
+│   ├── usuarios.json
+│   └── ventas.json
 ├── modelos/
-│   ├── __init__.py
 │   ├── producto.py
-│   └── usuario.py
+│   ├── usuario.py
+│   └── venta.py
 ├── servicios/
-│   ├── __init__.py
 │   ├── archivo_servicio.py
 │   └── restaurante_servicio.py
 ├── ui/
-│   ├── __init__.py
 │   ├── login_view.py
 │   └── main_view.py
 └── main.py
 
-## Componentes y contenedores utilizados
+## Funcionalidades
 
-La interfaz utiliza diferentes componentes de Tkinter y ttk.
+### Login
 
-### Frame
+Permite ingresar al sistema mediante usuario y contraseña.
 
-Se utiliza para dividir la aplicación en áreas principales,
-como el menú lateral y el área de contenido.
+### Productos
 
-### LabelFrame
+Permite:
 
-Se utiliza para agrupar visualmente el formulario de productos,
-el resumen y las tablas.
+- Registrar productos.
+- Consultar productos.
+- Actualizar productos.
+- Eliminar productos.
+- Visualizar los productos mediante Treeview.
 
-### Label
+### Usuarios
 
-Permite presentar títulos, nombres de campos e información
-al usuario.
+Permite consultar los usuarios registrados.
 
-### Entry
+### Ventas
 
-Permite ingresar los datos de los productos:
+La sección Ventas incorpora:
 
-- Código
-- Nombre
-- Categoría
-- Precio
-- Stock
+- ttk.Combobox para seleccionar un usuario.
+- ttk.Combobox para seleccionar un producto.
+- ttk.Button para solicitar el registro.
+- ttk.Treeview para presentar las ventas.
+- messagebox para comunicar el resultado.
 
-### ttk.Button
+Cada venta contiene:
 
-Permite solicitar las diferentes acciones de la aplicación.
+- Identificador.
+- Usuario.
+- Producto.
+- Fecha.
 
-### ttk.Treeview
+Los identificadores se generan automáticamente con el
+formato V001, V002, V003, etc.
 
-Se utiliza para mostrar productos y usuarios mediante filas
-y columnas.
+## Manejo de eventos
 
-### ttk.Scrollbar
+El botón Registrar venta utiliza command= para asociarse
+con el callback registrar_venta.
 
-Permite desplazarse verticalmente cuando la cantidad de
-registros supera el espacio disponible.
+El flujo utilizado es:
 
-### messagebox
+1. El usuario selecciona un usuario.
+2. El usuario selecciona un producto.
+3. Presiona Registrar venta.
+4. Tkinter ejecuta el callback registrar_venta.
+5. El callback obtiene los valores seleccionados.
+6. MainView solicita la operación a RestauranteServicio.
+7. RestauranteServicio valida los datos.
+8. Se crea un objeto Venta.
+9. La venta se guarda en ventas.json.
+10. MainView refresca el Treeview.
+11. Se presenta un mensaje de confirmación.
 
-Se utiliza para presentar mensajes de confirmación y error.
-
-## Gestión de productos
-
-La sección Productos permite realizar las siguientes operaciones:
-
-- Registrar un producto.
-- Cargar o consultar un producto mediante su código.
-- Actualizar los datos de un producto.
-- Eliminar un producto.
-- Limpiar el formulario.
-- Visualizar los productos registrados.
+La interfaz no escribe directamente los archivos JSON.
 
 ## Persistencia
 
-Los productos se almacenan en:
+ArchivoServicio se encarga de leer y escribir los archivos JSON.
 
-datos/productos.json
+Los datos utilizados son:
 
-Las operaciones de registro, actualización y eliminación
-modifican la colección del sistema y posteriormente guardan
-los cambios en el archivo JSON.
+- datos/productos.json
+- datos/usuarios.json
+- datos/ventas.json
 
-ArchivoServicio es responsable de leer y escribir archivos JSON.
-
-RestauranteServicio contiene la lógica de gestión de productos.
-
-MainView únicamente obtiene los datos del formulario, solicita
-las operaciones al servicio y actualiza la presentación.
-
-## Usuarios
-
-La sección Usuarios se mantiene como una vista de consulta.
-
-Los usuarios son cargados desde:
-
-datos/usuarios.json
-
-## Flujo
-
-1. Se ejecuta main.py.
-2. Se crea una única ventana principal de Tkinter.
-3. Se cargan productos y usuarios desde archivos JSON.
-4. Se muestra LoginView.
-5. El usuario ingresa sus credenciales.
-6. RestauranteServicio valida el acceso.
-7. Se muestra MainView.
-8. El usuario puede consultar usuarios o gestionar productos.
-9. Después de una operación de productos se actualiza la tabla.
-10. Los cambios se conservan en productos.json.
-11. Cerrar sesión regresa al LoginView utilizando la misma ventana.
+Las ventas permanecen almacenadas después de cerrar y volver
+a ejecutar la aplicación.
 
 ## Credenciales de prueba
 

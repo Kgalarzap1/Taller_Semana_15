@@ -11,7 +11,7 @@
         "nombre": "Pizza Personal",
         "categoria": "Comida",
         "precio": 6.0,
-        "stock": 15
+        "stock": 14
     },
     {
         "codigo": "P003",
@@ -25,6 +25,13 @@
         "nombre": "Gaseosa",
         "categoria": "Bebida",
         "precio": 1.5,
-        "stock": 40
+        "stock": 30
+    },
+    {
+        "codigo": "P005",
+        "nombre": "Hot Dog",
+        "categoria": "Comida",
+        "precio": 3.5,
+        "stock": 10
     }
 ]

@@ -4,9 +4,14 @@ from pathlib import Path
 
 class ArchivoServicio:
 
-    def __init__(self, carpeta_datos) -> None:
+    def __init__(
+        self,
+        carpeta_datos
+    ) -> None:
 
-        self.carpeta_datos = Path(carpeta_datos)
+        self.carpeta_datos = Path(
+            carpeta_datos
+        )
 
     def leer_json(
         self,
@@ -14,7 +19,8 @@ class ArchivoServicio:
     ) -> list:
 
         ruta = (
-            self.carpeta_datos / nombre_archivo
+            self.carpeta_datos
+            / nombre_archivo
         )
 
         try:
@@ -24,11 +30,17 @@ class ArchivoServicio:
                 encoding="utf-8"
             ) as archivo:
 
-                datos = json.load(archivo)
+                datos = json.load(
+                    archivo
+                )
 
-            if not isinstance(datos, list):
+            if not isinstance(
+                datos,
+                list
+            ):
                 raise ValueError(
-                    f"{nombre_archivo} debe contener una lista."
+                    f"{nombre_archivo} "
+                    "debe contener una lista."
                 )
 
             return datos
@@ -41,7 +53,7 @@ class ArchivoServicio:
 
             raise ValueError(
                 f"El archivo {nombre_archivo} "
-                f"contiene un JSON inválido."
+                "contiene un JSON inválido."
             ) from error
 
     def escribir_json(
@@ -51,7 +63,8 @@ class ArchivoServicio:
     ) -> None:
 
         ruta = (
-            self.carpeta_datos / nombre_archivo
+            self.carpeta_datos
+            / nombre_archivo
         )
 
         with ruta.open(
